@@ -1,0 +1,38 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET         /                       controllers.AuthenticationEntry.index()
+
+#Log out 
+GET         /logout                 controllers.AuthenticationEntry.logout()
+
+# Sign up form
+GET         /signup                 controllers.AuthenticationEntry.signup()
+
+#Sign in form
+GET         /signin                 controllers.AuthenticationEntry.signin()
+
+POST        /sessioncustomer        controllers.AuthenticationEntry.authenticateCustomer()
+
+POST        /customer               controllers.AuthenticationEntry.registerCustomer()
+
+#Store
+
+GET         /history                controllers.StoreEntry.history()
+
+POST        /addToCart/             controllers.StoreEntry.addToCart()
+
+GET         /store                  controllers.StoreEntry.store()
+
+GET         /cart                   controllers.StoreEntry.cart()
+
+POST        /makeOrder              controllers.StoreEntry.makeOrder()
+
+GET         /order                  controllers.StoreEntry.order()
+
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET         /assets/*file           controllers.Assets.versioned(path="/public", file: Asset)

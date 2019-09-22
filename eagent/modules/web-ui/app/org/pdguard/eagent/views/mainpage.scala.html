@@ -1,0 +1,170 @@
+@(content: String)(implicit session: play.mvc.Http.Session)
+
+@import org.pdguard.api.utils.DataProvenance
+@import org.pdguard.api.utils.DataUse
+
+@mainpage_head("mainpage") {
+    <div class="ui-widget">
+        <div class="ui-state-default ui-corner-all" style="padding: 0 .7em;height: 38px;">
+            <label for="pages"><span class="ui-icon ui-icon-home" style="float: right; margin-right: .3em;"></span>
+                Welcome to Escrow Agent's Web UI</label>&nbsp;&nbsp;
+            <div class="dropdown" style="display: inline-block; float: right; margin-right: 5%;">
+                <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">
+                    @session.get("user")<span class="caret"></span></button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                    <li role="presentation"><a role="button" tabindex="-1" href=@org.pdguard.eagent.controllers.web.routes.AuthenticationEntry.logout()>
+                        <span class="ui-icon ui-icon-power" style="float: left; margin-right: .3em;"></span>Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="tabs">
+        <ul>
+            <li><a href="#auth-rules">View authorization rules</a></li>
+            <li><a href="#logs">View authorization logs</a></li>
+        </ul>
+        <div id="auth-rules">
+            <div id="panel" class="jumbotron">
+                <div id="fixed-elem">
+                    <div id="auth-rules-alert" class="ui-widget">
+                        <div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;">
+                            <p style="font-size: 16px;"><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>
+                                <strong>Information: </strong>You don't have any defined authorization rules.</p>
+                        </div>
+                    </div><br>
+                    <button id="add-action" class="add">Add new action</button>
+                    <button id="add-provenance" class="add">Add new provenance</button>
+                    <div style="display: inline">
+                        <button class="lock">Lock data wizard</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="logs">
+            <div id="panel2" class="jumbotron">
+                <table id="auth-logs-table" class="table table-striped">
+                    <caption>Authorization Logs</caption>
+                    <thead>
+                        <tr>
+                            <th>Data Controller</th>
+                            <th>Application</th>
+                            <th>Data type</th>
+                            <th>Data use</th>
+                            <th>Interaction purpose</th>
+                            <th>Data Provenance</th>
+                            <th>Update field</th>
+                            <th>Type</th>
+                            <th>Date</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table><br>
+                <label for="time-selection">Select period: </label>
+                <div id="time-selection">
+                    <label for="from">From</label>
+                    <input type="text" id="from" name="from">
+                    <label for="to">to</label>
+                    <input type="text" id="to" name="to">
+                    <button id="period">Done</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="add-auth-rule" title="Authorization rule parameters">
+        <form>
+            <fieldset>
+                <label for="data-type">Data type:</label>
+                <div id="data-type" class="data-types">
+                    @Html(content)
+                </div>
+                <label for="data-use">Data use:</label>
+                <select id="data-use">
+                    @for(dataUse <- DataUse.values()) {
+                        <option value="@dataUse">@dataUse.toString().replace("_", " ")</option>
+                    }
+                </select><br>
+                <label for="data-controller">Data Controller: </label>
+                <select id="data-controller" class="data-controller"></select><br>
+                <label for="valid-to">Valid to:</label>
+                <input type="text" id="valid-to" class="valid-to"><br>
+            </fieldset>
+        </form>
+    </div>
+    <div id="add-allowable-provenance" title="Authorization rule parameters">
+        <form>
+            <fieldset>
+                <label for="data-type-prov">Data type:</label>
+                <div id="data-type-prov" class="data-types">
+                @Html(content)
+                </div>
+                <label for="data-provenance">Data provenance:</label>
+                <select id="data-provenance">
+                @for(dataProvenance <- DataProvenance.values()) {
+                    <option value="@dataProvenance">@dataProvenance.toString().replace("_", " ")</option>
+                }
+                </select><br>
+                <label for="data-controller-prov">Data Controller: </label>
+                <select id="data-controller-prov" class="data-controller"></select><br>
+                <label for="valid-to-prov">Valid to:</label>
+                <input type="text" id="valid-to-prov" class="valid-to"><br>
+            </fieldset>
+        </form>
+    </div>
+    <div id="confirm-deletion" title="Delete this authorization rule?">
+        <p>
+            <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+            Are you sure you want to delete this authorization rule?</p>
+    </div>
+    <div id="update-dialog-action" title="Update authorization rule">
+        <form>
+            <fieldset>
+                <label for="data-use2">Data use:</label>
+                <select id="data-use2">
+                    @for(dataUse <- DataUse.values()) {
+                        <option value="@dataUse">@dataUse.toString().replace("_", " ")</option>
+                    }
+                </select><br>
+                <label for="valid-to2">Valid to:</label>
+                <input type="text" id="valid-to2" class="valid-to"><br>
+            </fieldset>
+        </form>
+    </div>
+    <div id="update-dialog-provenance" title="Update authorization rule">
+        <form>
+            <fieldset>
+                <label for="data-provenance2">Data use:</label>
+                <select id="data-provenance2">
+                @for(dataProvenace <- DataProvenance.values()) {
+                    <option value="@dataProvenace">@dataProvenace.toString().replace("_", " ")</option>
+                }
+                </select><br>
+                <label for="valid-to-update-prov">Valid to:</label>
+                <input type="text" id="valid-to-update-prov" class="valid-to"><br>
+            </fieldset>
+        </form>
+    </div>
+    <div id="lock-dialog" title="Lock data">
+        <label for="data-type2">Data Type: </label>
+        <div id="data-type2" class="data-types">
+            @Html(content)
+        </div>
+        <label for="data-controller2">Data Controller: </label>
+        <select id="data-controller2" class="data-controller"></select><br>
+    </div>
+    <div id="alert-dialog" title="Warning">
+        <div class="ui-widget">
+            <div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0 .7em;">
+                <p style="font-size: 16px;">
+                    <span id="icon" class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>
+                </p>
+            </div>
+        </div><br>
+    </div>
+    <div id="footer" class="ui-widget">
+        <div class="ui-corner-all ui-state-active">
+            <p>&copy; 2014-2015 ISTLab - Athens University of Economics and Business Department
+                of Management Science and Technology</p>
+        </div>
+    </div>
+}

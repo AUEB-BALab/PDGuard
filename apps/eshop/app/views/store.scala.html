@@ -1,0 +1,109 @@
+@import forms.ProductEntry
+@import forms.Product
+@(productsList: List[Product], productForm: play.data.Form[ProductEntry], message: String, user: String)
+@import play.core.j.PlayMagicForJava
+@main("") {
+    <meta charset="utf-8">
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@controllers.routes.StoreEntry.store()">Store</a>
+
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="@controllers.routes.StoreEntry.cart()">Cart</a>
+                    </li>
+                    <li>
+                        <a href="@controllers.routes.StoreEntry.history()">Order's History</a>
+                    </li>
+                    <li>
+                        <a href="@controllers.routes.AuthenticationEntry.logout()">Log out</a>
+                    </li>
+                    <li>
+                        Welcome @user.
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <h2>@message</h2>
+
+            <div class="col-md-9" style = "margin-left:12%">
+
+                <div class="row carousel-holder">
+
+                    <div class="col-md-12">
+                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <img class="slide-image" src=@routes.Assets.versioned("images/G580.jpg") 
+                                    style="width:800px;height:350px;">
+                                </div>
+                                <div class="item">
+                                    <img class="slide-image" src=@routes.Assets.versioned("images/Air-Pro.jpg")          
+                                    style="width:800px;height:350px;">
+                                </div>
+                                <div class="item">
+                                        <img class="slide-image" src=@routes.Assets.versioned("images/sony.jpg")
+                                    style="width:800px;height:350px;">
+                                </div>
+                            </div>
+                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                            </a>
+                            <a class="right carousel-control"  href="#carousel-example-generic" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+    <div class="row">
+            <h1>Available Products:</h1>
+
+            @for(product <- productsList) {
+               <div class="col-sm-4 col-lg-4 col-md-4">
+                @helper.form(action = controllers.routes.StoreEntry.addToCart()) {
+
+                         <h3>@product.getName</h3>
+                         <img src=@routes.Assets.versioned("images/" + product.getName + ".jpg")  style="width:200px;height:150px;">
+                         <p>@product.getDescription</p>
+                         <p>@product.getManufacturer</p>
+                         <p>@product.getPrice</p>
+                          @helper.inputText(
+                              PlayMagicForJava.javaFieldtoScalaField(productForm("quantity")),
+                              'placeholder -> "quantity",
+                              '_label -> "Enter the quantity you want.",
+                              '_help -> ""
+                         )
+
+                    <input type="hidden" name="productId" value="@product.getProductKey()" />
+                    <button type="submit" class="btn btn-success">Add To Cart</button>
+                    }
+                    </div>
+                  }
+     </div>
+    <!-- jQuery -->
+    <script src=@routes.Assets.versioned("js/jquery.js")></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src=@routes.Assets.versioned("js/bootstrap.min.js")></script>
+}

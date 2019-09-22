@@ -1,0 +1,78 @@
+@import forms.OrderInfo
+@(orderForm: play.data.Form[OrderInfo])
+
+@import play.core.j.PlayMagicForJava
+
+@main("") { 
+ <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@controllers.routes.StoreEntry.store()">Store</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="@controllers.routes.StoreEntry.cart()">Cart</a>
+                    </li>
+                    <li>
+                        <a href="@controllers.routes.StoreEntry.history()">Order's History</a>
+                    </li>
+                    <li>
+                        <a href="@controllers.routes.AuthenticationEntry.logout()">Log out</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+        <div id="Order Form" style = "padding-left:6%">
+            <h3>Order form</h3>
+            @helper.form(action = controllers.routes.StoreEntry.makeOrder(),
+                'id -> "order-form", 'role -> "form") {
+                <div class="street address">
+                @helper.inputText(
+                    PlayMagicForJava.javaFieldtoScalaField(orderForm("streetAddress")),
+                    'placeholder -> "Street address",
+                    '_label -> "Enter your street address.",
+                    '_help -> ""
+                )
+                </div>
+                <div class="city">
+                @helper.inputText(
+                    PlayMagicForJava.javaFieldtoScalaField(orderForm("city")),
+                    'placeholder -> "City",
+                    '_label -> "Enter your city.",
+                    '_help -> ""
+                )
+                </div>
+                <div class="country">
+                @helper.inputText(
+                    PlayMagicForJava.javaFieldtoScalaField(orderForm("country")),
+                    'placeholder -> "Country",
+                    '_label -> "Enter your country.",
+                    '_help -> ""
+                )
+                </div>
+                <div class="Card number">
+                @helper.inputText(
+                    PlayMagicForJava.javaFieldtoScalaField(orderForm("cardNumber")),
+                    'placeholder -> "card number",
+                    '_label -> "Enter your card number.",
+                    '_help -> ""
+                )
+                </div>
+                <button type="submit" class="btn btn-success">Place order</button>
+             }
+}

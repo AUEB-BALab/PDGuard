@@ -1,0 +1,14 @@
+{
+    "PERSONAL": {
+        "provenances": ["PUBLIC_DATA"],
+        "actions": ["INTRANET"]
+    },
+    "IDENTITY": {
+        "provenances": ["DATA_SUBJECT_EXPLICIT", "PUBLIC_DATA"],
+        "actions": ["INTRANET", "COMPOSE_EMAIL_TO_SUBJECT"]
+    },
+    "GIVEN_NAME": {
+        "provenances": ["PUBLIC_DATA"],
+        "actions": []
+    }
+}

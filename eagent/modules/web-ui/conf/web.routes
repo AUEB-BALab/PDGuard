@@ -1,0 +1,33 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET         /                    org.pdguard.eagent.controllers.web.AuthenticationEntry.index()
+
+GET         /checks              org.pdguard.eagent.controllers.web.AuthenticationEntry.checkEmailAvailability(email: String)
+
+POST        /registration        org.pdguard.eagent.controllers.web.AuthenticationEntry.registration()
+
+GET         /mainpage            org.pdguard.eagent.controllers.web.AuthenticationEntry.mainpage()
+
+GET         /rules               org.pdguard.eagent.controllers.web.AuthorizationRuleCRUD.getAuthorizationRules()
+
+POST        /authenticate        org.pdguard.eagent.controllers.web.AuthenticationEntry.authenticateDataSubject()
+
+# Map static resources from the /public folder to the /assets URL path
+GET         /assets/*file        controllers.Assets.at(path="/public", file)
+
+GET         /logout              org.pdguard.eagent.controllers.web.AuthenticationEntry.logout()
+
+POST         /create             org.pdguard.eagent.controllers.web.AuthorizationRuleCRUD.createAuthorizationRule()
+
+GET         /update_action       org.pdguard.eagent.controllers.web.AuthorizationRuleCRUD.updateAllowableAction(dataType: String, dataUse: String, dataController: String, validTo: String, id: Integer)
+
+GET         /update_provenance   org.pdguard.eagent.controllers.web.AuthorizationRuleCRUD.updateAllowableProvenance(dataType: String, dataProvenance: String, dataController: String, validTo: String, id: Integer)
+
+GET         /delete              org.pdguard.eagent.controllers.web.AuthorizationRuleCRUD.deleteAuthorizationRule(id: Integer, removeAction: Boolean)
+
+POST         /lock               org.pdguard.eagent.controllers.web.AuthorizationRuleCRUD.lockData()
+
+GET         /logs                org.pdguard.eagent.controllers.web.AuthorizationLog.getAuthorizationLogs(from: String, to: String)

@@ -1,0 +1,93 @@
+@main("") {
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="The index page of the eshop">
+    <meta name="author" content="Thodoris Mavrikis, Thodoris Sotiropoulos">
+
+    <title>Shop Homepage</title>
+
+
+</head>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Home</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="@controllers.routes.AuthenticationEntry.signup()">Sign up</a>
+                    </li>
+                    <li>
+                        <a href="@controllers.routes.AuthenticationEntry.signin()">Sign in</a>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+
+    <div id="content">
+            <ul class ="main">
+            <h2 style="text-align: center" class = "news">News:</h2>
+            <div id = "news">
+                <p><img src = @routes.Assets.versioned("images/laptops.jpg")></p>
+                <p>
+                    No matter how stacked its specs are, a laptop is useless if it can’t hold a charge. <br>
+                    Fortunately, there are plenty of notebooks that go the distance. Using our Laptop <br>   
+
+                    Mag Battery Test(continuous Web surfing over Wi-Fi),we’ve identified the 10<br>
+                    longest-lasting notebooks on the market. We’re talking anywhere from 9 hours to <br>
+                    more than 20 hours of endurance, which should more than suffice for that cross-country<br>
+                    fight, long day of meetings or multiple, back-to-back classes.
+                </p>
+                <p>
+                    Our favorite business laptop lasts for 15 hours and 26 minutes on a charge with its <br>
+                    extended battery, which is long enough to last through a flight from New York to Taipei.<br>
+                    During that time, you'll enjoy the 14-inch ThinkPad T450s' sharp 1080p display, durable <br>
+                    chassis, speedy Intel 5th Generation Core Series processor and best-in-class keyboard.<br>
+                    Lenovo's Power Bridge technology even lets you swap out the battery without powering <br>
+                    down first.
+                </p>
+                <p>
+                    Lasting 14 hours and 37 minutes in laptop mode (and 7:29 when docked), the jet-black<br>
+                    Toshiba Portege Z20t is among the machines with the best endurance on record. The slick <br>
+                    design — which combines a sleek tablet and a slim keyboard into an elegant 2-in-1 — is <br>
+                    nothing to sneeze at, either. We love the bright and crisp 12.5-inch, 1080p display, as<br>
+                    well as the included Wacom-powered stylus that made it a breeze to use the multitouch<br>
+                    display.
+                </p>
+            </div><!--News-->
+        </div> <!--Content-->
+    <div id="footer">Footer</div>
+    <style>
+        h2.news{
+            color : #444444;
+            font-family: 'Ubuntu', sans-serif;
+        }
+        #news{
+            font-family: 'Ubuntu', sans-serif;
+            position: relative;
+            margin-left: 25%;
+            border-left : 25%;
+        }
+    </style>
+}

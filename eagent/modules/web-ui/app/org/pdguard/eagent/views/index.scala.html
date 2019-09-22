@@ -1,0 +1,99 @@
+@(signInForm: play.data.Form[org.pdguard.eagent.userstate.DataSubjectNotAuthenticated])(registrationForm: play.data.Form[org.pdguard.eagent.userstate.DataSubjectNew])
+
+@import play.core.j.PlayMagicForJava
+
+@import play.api.Play.current
+@import play.api.i18n.Messages.Implicits._
+
+@main("Index") {
+    <div class="ui-widget" xmlns="http://www.w3.org/1999/html">
+        <div class="ui-state-default ui-corner-all" style="padding: 0 .7em;height: 58px;">
+            <label for="pages"><span class="ui-icon ui-icon-home" style="float: left; margin-right: .3em;"></span>
+                Welcome to Escrow Agent's Web UI</label>
+            @helper.form(action = org.pdguard.eagent.controllers.web.routes.AuthenticationEntry.authenticateDataSubject(),
+                'id->"sign-in-form", 'role->"form") {
+                <button id="sign-in-button" class="sign-in">Sign in</button>
+                <div id="email-div" class="sign-in">
+                @helper.inputText(
+                    PlayMagicForJava.javaFieldtoScalaField(signInForm("email")),
+                    'placeholder -> "Email",
+                    'class -> "form-control",
+                    '_label -> null,
+                    '_help -> ""
+                )
+                </div>
+                <div class="sign-in">
+                @helper.inputPassword(
+                    PlayMagicForJava.javaFieldtoScalaField(signInForm("password")),
+                    'placeholder -> "Password",
+                    'class -> "form-control",
+                    '_label -> null
+                )
+                </div>
+            }
+        </div>
+    </div><br>
+    <div id = "registration">
+        <div class="ui-widget">
+            <div class="ui-state-default ui-corner-all" style="height: 38px;">
+                <p style="text-align: center">
+                    Registration form</p>
+            </div>
+        </div>
+        <div class="ui-widget">
+            <div class="ui-state-highlight ui-corner-all">
+                <div id = "registrationForm">
+                    @helper.form(action = org.pdguard.eagent.controllers.web.routes.AuthenticationEntry.registration()) {
+                        @helper.inputText(
+                            PlayMagicForJava.javaFieldtoScalaField(registrationForm("firstName")),
+                            'placeholder -> "First Name",
+                            'class -> "form-control",
+                            '_label -> <b>First Name<span class='asterisc'>*</span></b>,
+                            '_help -> ""
+                        )
+                        @helper.inputText(
+                            PlayMagicForJava.javaFieldtoScalaField(registrationForm("surname")),
+                            'placeholder -> "Surname",
+                            'class -> "form-control",
+                            '_label -> <b>Surname</b><span class = "asterisc">*</span>,
+                            '_help -> ""
+                        )
+                        @helper.inputText(
+                            PlayMagicForJava.javaFieldtoScalaField(registrationForm("email")),
+                            'placeholder -> "Email",
+                            'class -> "form-control",
+                            '_label -> <b>e-mail</b><span id="email-message" class = "asterisc">*</span>,
+                            '_help -> "",
+                            'onchange -> "checkEmail($(this))"
+                        )
+                        @helper.inputText(
+                            PlayMagicForJava.javaFieldtoScalaField(registrationForm("username")),
+                            'placeholder -> "Username",
+                            'class -> "form-control",
+                            '_label -> <b>username</b><span id="username-message" class = "asterisc">*</span>,
+                            '_help -> ""
+                        )
+                        @helper.inputPassword(
+                            PlayMagicForJava.javaFieldtoScalaField(registrationForm("password")),
+                            'id -> "pswrd1",
+                            'placeholder -> "Password",
+                            'class -> "form-control",
+                            '_label -> <b>Password</b><span class = "asterisc">*</span>,
+                            '_help -> ""
+                        )
+                        @helper.inputPassword(
+                            PlayMagicForJava.javaFieldtoScalaField(registrationForm("repeatedPassword")),
+                            'placeholder -> "Repeat Password",
+                            'class -> "form-control",
+                            '_label -> <b>Repeat Password</b><span class = "asterisc">*</span>,
+                            'onchange -> "verifyPasswords($('#pswrd1'), $(this))"
+                        )
+                        <span class = "asterisc">*</span>Fields are required<br><br>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="reset" class="btn btn-primary">Cancel</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}

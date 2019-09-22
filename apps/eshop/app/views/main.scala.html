@@ -1,0 +1,19 @@
+@(title: String)(content: Html)
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <title>E-shop</title>
+
+        <!-- Bootstrap Core CSS -->
+        <link href= @routes.Assets.versioned("css/bootstrap.min.css") rel="stylesheet">
+
+        <!-- Custom CSS -->
+        <link href= @routes.Assets.versioned("css/shop-homepage.css") rel="stylesheet">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")"></div>
+    </head>
+    <body>
+        @content
+    </body>
+</html>

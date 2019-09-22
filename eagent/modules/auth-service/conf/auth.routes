@@ -1,0 +1,23 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Decryption Service.
+GET         /decrypt                org.pdguard.eagent.controllers.authservice.AuthorizationService.decryptService(dataType, dataUse,interactionPurpose, clientId, requestToken)
+
+# Decryption Services with authorization processing according to the default authorization rules.
+GET         /decrypt_default        org.pdguard.eagent.controllers.authservice.AuthorizationService.decryptServiceDefaultAuth(dataType, dataUse,interactionPurpose, clientId, requestToken)
+
+# Encryption Service.
+GET         /encrypt                org.pdguard.eagent.controllers.authservice.AuthorizationService.encryptService(dataType, dataProvenance, update: Boolean, clientId, requestToken)
+
+# Encryption Service with default authorization processing.
+GET         /encrypt_default        org.pdguard.eagent.controllers.authservice.AuthorizationService.encryptServiceDefaultAuth(dataType, dataProvenance, update: Boolean, clientId, requestToken)
+
+POST        /register               org.pdguard.eagent.controllers.authservice.ClientRegistrationController.registerClient()
+
+POST        /token                  org.pdguard.eagent.controllers.authservice.PDGuardService.requestToken()
+
+POST        /authorize              org.pdguard.eagent.controllers.authservice.PDGuardService.authorizeRequestToken()
+
+POST        /key                    org.pdguard.eagent.controllers.authservice.PDGuardService.requestTokenExchange()

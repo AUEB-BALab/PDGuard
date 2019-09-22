@@ -1,0 +1,88 @@
+@import forms.Registration
+@(signupForm: play.data.Form[Registration])
+
+@import play.core.j.PlayMagicForJava
+@main("") {
+      <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Home</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="@controllers.routes.AuthenticationEntry.signup()">Sign up</a>
+                    </li>
+                    <li>
+                        <a href="@controllers.routes.AuthenticationEntry.signin()">Sign in</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+        <div class="jumbotron" id = "registration" style = "padding-left:6%">
+            <h3>Registration form</h3>
+            <div class="center-block" id = "registrationForm" style="">
+                @helper.form(action = controllers.routes.AuthenticationEntry.registerCustomer()) {
+                    @helper.inputText(
+                        PlayMagicForJava.javaFieldtoScalaField(signupForm("firstName")),
+                        'placeholder -> "First Name",
+                        '_label -> <b>First Name<span class="asterisc">*</span></b>,
+                        '_help -> ""
+                    )
+                    @helper.inputText(
+                        PlayMagicForJava.javaFieldtoScalaField(signupForm("surname")),
+                        'placeholder -> "Surname",
+                        '_label -> <b>Surname</b><span class = "asterisc">*</span>,
+                        '_help -> ""
+                    )
+                    @helper.inputText(
+                        PlayMagicForJava.javaFieldtoScalaField(signupForm("email")),
+                        'placeholder -> "Email",
+                        '_label -> <b>e-mail</b><span id="email-message" class = "asterisc">*</span>,
+                        '_help -> ""
+                    )
+                    @helper.inputPassword(
+                        PlayMagicForJava.javaFieldtoScalaField(signupForm("password")),
+                        'id -> "pswrd1",
+                        'placeholder -> "Password",
+                        '_label -> <b>Password</b><span class = "asterisc">*</span>,
+                        '_help -> ""
+                    )
+                    @helper.inputPassword(
+                    PlayMagicForJava.javaFieldtoScalaField(signupForm("repeatedPassword")),
+                        'placeholder -> "Repeat Password",
+                        '_label -> <b>Repeat Password</b><span class = "asterisc">*</span>
+                    )
+                    @helper.inputText(
+                        PlayMagicForJava.javaFieldtoScalaField(signupForm("eagent")),
+                        'placeholder -> "Escrow Agent",
+                        '_label -> <b>Trusted escrow agent</b><span id="email-message" class = "asterisc">*</span>,
+                        '_help -> ""
+                    )
+                    @helper.inputText(
+                        PlayMagicForJava.javaFieldtoScalaField(signupForm("dataSubjectId")),
+                        'placeholder -> "Your Escrow Agent ID",
+                        '_label -> <b>Trusted escrow agent</b><span id="email-message" class = "asterisc">*</span>,
+                        '_help -> ""
+                    )
+                    <span class = "asterisc">*</span>Fields are required<br><br>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                    <button type="reset" class="btn btn-success">Cancel</button>
+                }
+            </div>
+        </div>
+    </div>
+}

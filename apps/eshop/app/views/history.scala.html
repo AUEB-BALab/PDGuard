@@ -1,0 +1,67 @@
+@import forms.Order
+@import forms.Transaction
+@(orderList: List[Transaction])
+@main("") {
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="@controllers.routes.StoreEntry.store()">Store</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="@controllers.routes.StoreEntry.cart()">Cart</a>
+                    </li>
+                    <li>
+                        <a href="@controllers.routes.StoreEntry.history()">Order's History</a>
+                    </li>
+                    <li>
+                        <a href="@controllers.routes.AuthenticationEntry.logout()">Log out</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <div id = "order list">
+        <table class="table table-bordered">
+            <caption>Order history</caption>
+            <thead>
+                <tr>
+                    <td>#Order</td>
+                    <td>Products</td>
+                    <td>Street Address</td>
+                    <td>City</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                @for(order <- orderList) {
+                    <td>@order.asInstanceOf[Order].getOrderId</td>
+                    <td>
+                        <ul>
+                            @for(product <- order.getProducts) {
+                                <li>Name: @product.getName, Quantity: @product.getQuantity, Price: @product.getPrice</li>
+                            }
+                        </ul>
+                    </td>
+                    <td>@order.asInstanceOf[Order].getOrderInfo.getStreetAddress</td>
+                    <td>@order.asInstanceOf[Order].getOrderInfo.getCity</td></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    @if(orderList.isEmpty()) {
+        <div class="alert alert-warning" role="alert"><b>Warning: </b> You have made no orders in the past.</div>
+    }
+}
