@@ -1,13 +1,12 @@
-PDGuard
-=======
+# PDGuard:Control and secure the processing of personal data
 
 This repository contains the implementation of a
 framework for the control and secure processing of personal data which we call PDGuard.
-The full decription of this framework will be published by the
-*International Journal of Information Security*.
+The full decription of this framework has been published by the
+[International Journal of Information Security](https://rdcu.be/bRQqg).
 A pre-print is also [available](https://dimitro.gr/assets/papers/MSKS19.pdf).
 
-## Abstract
+## Overview
 
 Online personal data are rarely,
 if ever,
