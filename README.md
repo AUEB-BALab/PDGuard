@@ -1,4 +1,4 @@
-# PDGuard:Control and secure the processing of personal data
+# PDGuard: Control and secure the processing of personal data
 
 This repository contains the implementation of a
 framework for the control and secure processing of personal data which we call PDGuard.
