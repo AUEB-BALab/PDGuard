@@ -135,7 +135,7 @@
       <!-- coordinates of the required library -->
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <version>4.13.1</version>
 
       <!-- this dependency is only used for running and compiling tests -->
       <scope>test</scope>
